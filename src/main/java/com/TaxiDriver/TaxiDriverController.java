@@ -16,21 +16,23 @@ public class TaxiDriverController
 
 
     @RequestMapping(value = ("/users"), method = RequestMethod.GET)
-    public String listUsers()
+    public Iterable<User> listUsers()
     {
-        return "List Users";
+        return userRepository.findAll();
     }
 
     @RequestMapping(value = ("/users"), method = RequestMethod.DELETE)
     public String deleteUsers()
     {
+        userRepository.deleteAll();
+
         return "All deleted";
     }
 
     @RequestMapping(value = ("/users/customers"), method = RequestMethod.GET)
-    public String listCustomers()
+    public Iterable<User> listCustomers()
     {
-        return "List Customers";
+        return userRepository.findByType("Customer");
     }
 
     @RequestMapping(value = ("/users/customers"), method = RequestMethod.POST)
@@ -42,9 +44,9 @@ public class TaxiDriverController
     }
 
     @RequestMapping(value = ("/users/drivers"), method = RequestMethod.GET)
-    public String listDrivers()
+    public Iterable<User> listDrivers()
     {
-        return "List Drivers";
+        return userRepository.findByType("Driver");
     }
 
     @RequestMapping(value = ("/users/drivers"), method = RequestMethod.POST)

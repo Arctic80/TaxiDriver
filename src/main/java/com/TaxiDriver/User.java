@@ -5,17 +5,24 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User
-{
+public abstract class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    private String email;
+    private String password;
+    private String type;
 
-    String email;
-    String password;
 
-    public User(String email, String password)
-    {
+    public User() {
+
+        this.type = getClass().getSimpleName();
+    }
+
+    public User(String email, String password) {
+
+        this.type = getClass().getSimpleName();
         this.email = email;
         this.password = password;
     }
@@ -24,7 +31,19 @@ public abstract class User
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getType() {
+        return type;
     }
 }
